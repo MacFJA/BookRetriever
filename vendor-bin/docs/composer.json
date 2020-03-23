@@ -1,0 +1,14 @@
+{
+    "name": "macfja/book-retriever-docs",
+    "type": "project",
+    "description": "Composer bin for generated documentation",
+    "license": "MIT",
+    "require": {
+        "theseer/phpdox": "^0.12.0"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.3",
+        "phploc/phploc": "^6.0",
+        "roave/security-advisories": "dev-master"
+    }
+}

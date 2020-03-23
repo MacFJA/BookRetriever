@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpdox xmlns="http://xml.phpdox.net/config" silent="false">
+    <bootstrap/>
+
+    <project name="BookRetriever" source="${basedir}/lib" workdir="${basedir}/build/phpdox/xml">
+        <!--  Additional configuration for the collecting process (parsing of php code, generation of xml data) -->
+        <collector publiconly="false" backend="parser" encoding="auto">
+
+            <!--  <include / exclude filter for filelist generator, mask must follow fnmatch() requirements  -->
+            <!--  Multiple elements can be added to define more than one mask per filter -->
+            <include mask="*.php"/>
+            <exclude mask=""/>
+
+            <!--  How to handle inheritance -->
+            <inheritance resolve="true"/>
+
+        </collector>
+
+        <!--  Configuration of generation process -->
+        <generator output="${basedir}/docs">
+            <!-- A generation process consists of one or more build tasks and of (optional) enrich sources -->
+
+            <enrich base="${basedir}/build">
+                <!-- add phploc output -->
+                <source type="phploc" />
+            </enrich>
+
+            <!--  default engine "html" -->
+            <build engine="html" enabled="true" output="html">
+                <template dir="${phpDox.home}/templates/html"/>
+                <file extension="xhtml"/>
+            </build>
+
+        </generator>
+    </project>
+
+</phpdox>

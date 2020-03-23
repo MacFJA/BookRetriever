@@ -1,0 +1,5 @@
+/analyze/vendor
+/docs/vendor
+
+/analyze/composer.lock
+/docs/composer.lock

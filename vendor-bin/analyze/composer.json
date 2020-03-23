@@ -1,0 +1,20 @@
+{
+    "name": "macfja/book-retriever-analyze",
+    "type": "project",
+    "description": "Composer bin for static analyze",
+    "license": "MIT",
+    "require": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "jakub-onderka/php-parallel-lint": "^1.0",
+        "phan/phan": "^2.6",
+        "phpmd/phpmd": "^2.8",
+        "phpstan/phpstan": "^0.12.17",
+        "rskuipers/php-assumptions": "^0.8.0",
+        "sebastian/phpcpd": "^5.0",
+        "vimeo/psalm": "^3.9"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.3",
+        "roave/security-advisories": "dev-master"
+    }
+}
