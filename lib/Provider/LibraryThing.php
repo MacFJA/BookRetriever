@@ -32,7 +32,18 @@ use function sprintf;
 use function urlencode;
 
 /**
- * Class LibraryThing.
+ * LibraryThing search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ * They can only be use one at a time.
+ *
+ * You need an account to use this provider.
+ * (https://www.librarything.com/services/keys.php)
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */
@@ -64,9 +75,6 @@ class LibraryThing implements ProviderInterface, ConfigurableInterface, HttpClie
         return 'LibraryThing';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function searchIsbn(string $isbn): array
     {
         $client = $this->getHttpClient();

@@ -32,7 +32,18 @@ use MacFJA\BookRetriever\SearchResult\SearchResultBuilder;
 use function strtoupper;
 
 /**
- * Class Ebay.
+ * Ebay search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ * They can only be use one at a time.
+ *
+ * You need an account to use this provider.
+ * (https://developer.ebay.com/signin)
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */

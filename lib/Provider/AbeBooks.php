@@ -112,9 +112,6 @@ class AbeBooks implements ProviderInterface, HttpClientAwareInterface
         return array_keys(self::SEARCH_MAPPING);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function extractFromXml(SimpleXMLElement $xml): array
     {
         $books = $xml->xpath('//*[@itemtype="http://schema.org/Book"]');

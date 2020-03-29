@@ -28,7 +28,15 @@ use MacFJA\BookRetriever\SearchResult\SearchResultBuilder;
 use function urlencode;
 
 /**
- * Class ISBNDb.
+ * ISBNDb search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ * They can only be use one at a time.
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */
@@ -55,9 +63,6 @@ class ISBNDb implements ProviderInterface, ConfigurableInterface, HttpClientAwar
         return 'ISBNdb';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function searchIsbn(string $isbn): array
     {
         $client = $this->getHttpClient();

@@ -31,7 +31,21 @@ use SimpleXMLElement;
 use function strtolower;
 
 /**
- * Class GoodReads.
+ * GoodReads search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ *  - Title
+ *  - Author
+ *  - Id (GoodReads Identifier)
+ * They can only be use one at a time.
+ *
+ * You need an account to use this provider.
+ * (https://www.goodreads.com/user/new)
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */

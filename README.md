@@ -54,7 +54,7 @@ $providers = [
     new \MacFJA\BookRetriever\Provider\Amazon(),
     new \MacFJA\BookRetriever\Provider\AntoineOnline($htmlGetter, $isbn),
     new \MacFJA\BookRetriever\Provider\ArchiveOrg($opds),
-    new \MacFJA\BookRetriever\Provider\COPAC($sru),
+    new \MacFJA\BookRetriever\Provider\LibraryHub($sru),
     new \MacFJA\BookRetriever\Provider\DigitEyes(),
     new \MacFJA\BookRetriever\Provider\Ebay()
 ];
@@ -164,6 +164,11 @@ class SomeController extends AbstractController
     }
 }
 ```
+
+## Providers
+
+There are currently **19** built-in providers.
+You can find [more details here](Providers.md).
 
 ## Contributing
 

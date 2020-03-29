@@ -40,9 +40,6 @@ abstract class OpenPublicationDistributionSystemProvider implements ProviderInte
         $this->opds = $opds;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function searchIsbn(string $isbn): array
     {
         $client = $this->getHttpClient();

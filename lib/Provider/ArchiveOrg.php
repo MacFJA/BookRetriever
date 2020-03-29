@@ -23,7 +23,15 @@ use function sprintf;
 use function urlencode;
 
 /**
- * Class ArchiveOrg.
+ * ArchiveOrg search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ * They can only be use one at a time.
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */

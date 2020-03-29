@@ -24,7 +24,17 @@ use function sprintf;
 use function urlencode;
 
 /**
- * Class FeedBooks.
+ * FeedBooks search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ * They can only be use one at a time.
+ *
+ * Language can be configured, available language: fr, en (default), de, it, es.
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */

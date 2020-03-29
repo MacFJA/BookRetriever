@@ -41,9 +41,6 @@ abstract class SearchRetrieveUrlProvider implements ProviderInterface, HttpClien
         $this->sru = $sru;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function search(array $criteria): array
     {
         $client = $this->getHttpClient();

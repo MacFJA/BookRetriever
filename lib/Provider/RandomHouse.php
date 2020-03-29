@@ -33,7 +33,15 @@ use function sprintf;
 use function strpos;
 
 /**
- * Class RandomHouse.
+ * Random House search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ * They can only be use one at a time.
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */
@@ -65,9 +73,6 @@ class RandomHouse implements ProviderInterface, HttpClientAwareInterface
         return 'Random House';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function searchIsbn(string $isbn): array
     {
         $isbn13 = $this->isbnTool->check->is10($isbn) ? $this->isbnTool->translate->to13($isbn) : $isbn;

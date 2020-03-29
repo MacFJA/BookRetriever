@@ -23,22 +23,35 @@ use function http_build_query;
 use function sprintf;
 
 /**
- * Class COPAC.
+ * Library Hub search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ *  - ISSN
+ *  - Title
+ *  - Publisher
+ *  - Author
+ *  - Language
+ * They can be mixed together.
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */
-class COPAC extends SearchRetrieveUrlProvider
+class LibraryHub extends SearchRetrieveUrlProvider
 {
     public const BASE_API_URL = 'http://discover.libraryhub.jisc.ac.uk:210/discover?operation=searchRetrieve&version=1.1&query=%s&recordSchema=mods&maximumRecords=1';
 
     public function getCode(): string
     {
-        return 'copac';
+        return 'library-hub';
     }
 
     public static function getLabel(): string
     {
-        return 'COCAP*';
+        return 'Library Hub';
     }
 
     public function getSearchableField(): array

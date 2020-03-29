@@ -35,7 +35,15 @@ use stdClass;
 use function strlen;
 
 /**
- * Class GoogleBooks.
+ * Google Books search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ * They can only be use one at a time.
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */
@@ -53,9 +61,6 @@ class GoogleBooks implements ProviderInterface
         return 'Google Books';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function searchIsbn(string $isbn): array
     {
         $client = new \Scriptotek\GoogleBooks\Volumes(new \Scriptotek\GoogleBooks\GoogleBooks());

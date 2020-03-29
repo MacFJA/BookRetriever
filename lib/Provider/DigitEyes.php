@@ -31,7 +31,18 @@ use MacFJA\BookRetriever\SearchResult\SearchResultBuilder;
 use function sprintf;
 
 /**
- * Class DigitEyes.
+ * DigitEyes search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ * They can only be use one at a time.
+ *
+ * You need an account to use this provider.
+ * (https://www.digit-eyes.com/cgi-bin/digiteyes.cgi?action=signup)
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */
@@ -81,9 +92,6 @@ class DigitEyes implements ProviderInterface, ConfigurableInterface, HttpClientA
         return 'DigitEyes';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function searchIsbn(string $isbn): array
     {
         $client = $this->getHttpClient();

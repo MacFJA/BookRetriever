@@ -37,7 +37,18 @@ use function strtolower;
 use function urlencode;
 
 /**
- * Class OCLC.
+ * Online Computer Library Center search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ *  - Title
+ *  - Author
+ *  - OCLC
+ * They can be mixed together.
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */
@@ -78,12 +89,9 @@ class OCLC implements ProviderInterface, HttpClientAwareInterface
 
     public static function getLabel(): string
     {
-        return 'OCLC';
+        return 'Online Computer Library Center';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function search(array $criteria): array
     {
         if (1 === count($criteria)) {

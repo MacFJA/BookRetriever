@@ -73,9 +73,6 @@ class LaLibrairie implements ProviderInterface, HttpClientAwareInterface
         return 'Lalibrairie.com (HTML)';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function searchIsbn(string $isbn): array
     {
         $client = $this->getHttpClient();

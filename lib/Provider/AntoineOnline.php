@@ -79,9 +79,6 @@ class AntoineOnline implements ProviderInterface, HttpClientAwareInterface
         return 'AntoineOnline (HTML)';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function searchIsbn(string $isbn): array
     {
         $isbn = $this->isbnTool->hyphens->removeHyphens($isbn);

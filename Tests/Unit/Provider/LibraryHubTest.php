@@ -22,13 +22,13 @@ namespace MacFJA\BookRetriever\Tests\Unit\Provider;
 use function count;
 use Isbn\Isbn;
 use MacFJA\BookRetriever\Helper\SRUParser;
-use MacFJA\BookRetriever\Provider\COPAC;
+use MacFJA\BookRetriever\Provider\LibraryHub;
 use MacFJA\BookRetriever\ProviderInterface;
 use MacFJA\BookRetriever\SearchResultInterface;
 use MacFJA\BookRetriever\Tests\Unit\BaseProviderTestCase;
 
 /**
- * @covers \MacFJA\BookRetriever\Provider\COPAC
+ * @covers \MacFJA\BookRetriever\Provider\LibraryHub
  * @psalm-suppress InternalMethod
  *
  * @uses \MacFJA\BookRetriever\ProviderConfigurator
@@ -40,13 +40,13 @@ use MacFJA\BookRetriever\Tests\Unit\BaseProviderTestCase;
  *
  * @internal
  */
-class CopacTest extends BaseProviderTestCase
+class LibraryHubTest extends BaseProviderTestCase
 {
     public function dataProvider($testName): array
     {
         if ('testSearchIsbn' === $testName) {
             return [
-                [['copac.response'], '9782253006329', 1, 'Vingt mille lieues sous les mers, 20,000 lieues sous les mers'],
+                [['libraryhub.response'], '9782253006329', 1, 'Vingt mille lieues sous les mers, 20,000 lieues sous les mers'],
             ];
         }
 
@@ -55,7 +55,7 @@ class CopacTest extends BaseProviderTestCase
 
     protected function getProvider(): ProviderInterface
     {
-        return new COPAC(new SRUParser());
+        return new LibraryHub(new SRUParser());
     }
 
     /**

@@ -35,7 +35,18 @@ use function sprintf;
 use function strtolower;
 
 /**
- * Class OpenLibrary.
+ * Open Library Books search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ *  - OCLC
+ *  - LCCN (Library of Congress Control Number)
+ *  - OLID (Open Library Identifier)
+ * They can only be use one at a time.
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */

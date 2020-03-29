@@ -75,9 +75,6 @@ class EuroBuch implements ProviderInterface, HttpClientAwareInterface
         return 'EuroBuch.ch (HTML)';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function searchIsbn(string $isbn): array
     {
         $xml = $this->getHtmlGetter()->getWebpageAsDom(sprintf(static::WEBPAGE_PATTERN, urlencode($this->isbnTool->hyphens->removeHyphens($isbn))));

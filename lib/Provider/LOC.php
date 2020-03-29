@@ -27,7 +27,20 @@ use function sprintf;
 use function urlencode;
 
 /**
- * Class LOC.
+ * The Library of Congress search engine provider.
+ *
+ * Available search are:
+ *  - ISBN
+ *  - EAN
+ *  - Title
+ *  - Publisher
+ *  - Language
+ *  - UPC
+ *  - LCCN (Library of Congress Control Number)
+ * They can be mixed together.
+ *
+ * @author MacFJA
+ * @license MIT
  *
  * @suppress PhanUnreferencedClass
  */
