@@ -102,8 +102,8 @@ class LaLibrairie implements ProviderInterface, HttpClientAwareInterface
         $allMeta = $xml->xpath('//*[local-name()="meta"]');
         $itemProperties = $xml->xpath('//*[@itemprop]');
 
-        $result = $this->handleMeta(['authors' => []], $allMeta);
-        $result = $this->handleItemProperties($result, $itemProperties);
+        $result = $this->handleMeta(['authors' => []], (false === $allMeta) ? [] : $allMeta);
+        $result = $this->handleItemProperties($result, (false === $itemProperties) ? [] : $itemProperties);
 
         return [SearchResultBuilder::createFromArray($result)];
     }

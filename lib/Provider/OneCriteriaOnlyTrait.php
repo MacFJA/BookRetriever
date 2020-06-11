@@ -33,7 +33,7 @@ trait OneCriteriaOnlyTrait
     public function search(array $criteria): array
     {
         if (1 === count($criteria)) {
-            return $this->oneCriteriaSearch(key($criteria), current($criteria));
+            return $this->oneCriteriaSearch((string) key($criteria), current($criteria));
         }
 
         return [];

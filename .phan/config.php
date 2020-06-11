@@ -92,29 +92,29 @@ return [
     // or if **any** type in an invoked expression is not a callable.
     // Setting this to true will introduce numerous false positives
     // (and reveal some bugs).
-    'strict_method_checking' => false,
+    'strict_method_checking' => true,
 
     // If enabled, Phan will warn if **any** type of the object expression for a property access
     // does not contain that property.
-    'strict_object_checking' => false,
+    'strict_object_checking' => true,
 
     // If enabled, Phan will warn if **any** type in the argument's union type
     // cannot be cast to a type in the parameter's expected union type.
     // Setting this to true will introduce numerous false positives
     // (and reveal some bugs).
-    'strict_param_checking' => false,
+    'strict_param_checking' => true,
 
     // If enabled, Phan will warn if **any** type in a property assignment's union type
     // cannot be cast to a type in the property's declared union type.
     // Setting this to true will introduce numerous false positives
     // (and reveal some bugs).
-    'strict_property_checking' => false,
+    'strict_property_checking' => true,
 
     // If enabled, Phan will warn if **any** type in a returned value's union type
     // cannot be cast to the declared return type.
     // Setting this to true will introduce numerous false positives
     // (and reveal some bugs).
-    'strict_return_checking' => false,
+    'strict_return_checking' => true,
 
     // If true, seemingly undeclared variables in the global
     // scope will be ignored.
@@ -149,7 +149,7 @@ return [
     // If true, check to make sure the return type declared
     // in the doc-block (if any) matches the return type
     // declared in the method signature.
-    'check_docblock_signature_return_type_match' => false,
+    'check_docblock_signature_return_type_match' => true,
 
     // This setting maps case-insensitive strings to union types.
     //
@@ -184,13 +184,13 @@ return [
     // `dead_code_detection` will also enable unused variable detection.
     //
     // This has a few known false positives, e.g. for loops or branches.
-    'unused_variable_detection' => false,
+    'unused_variable_detection' => true,
 
     // Set to true in order to attempt to detect redundant and impossible conditions.
     //
     // This has some false positives involving loops,
     // variables set in branches of loops, and global variables.
-    'redundant_condition_detection' => false,
+    'redundant_condition_detection' => true,
 
     // If enabled, Phan will act as though it's certain of real return types of a subset of internal functions,
     // even if those return types aren't available in reflection (real types were taken from php 7.3 or 8.0-dev, depending on target_php_version).

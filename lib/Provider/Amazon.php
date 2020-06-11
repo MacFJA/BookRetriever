@@ -21,19 +21,21 @@ namespace MacFJA\BookRetriever\Provider;
 
 use function array_filter;
 use function array_key_exists;
+use function assert;
 use function count;
 use function current;
 use DateTime;
 use function implode;
 use InvalidArgumentException;
+use function is_bool;
 use function key;
 use MacFJA\BookRetriever\Helper\ConfigurableInterface;
 use MacFJA\BookRetriever\Helper\HttpClientAwareInterface;
 use MacFJA\BookRetriever\Helper\HttpClientAwareTrait;
 use MacFJA\BookRetriever\ProviderInterface;
+// @phan-suppress-next-line PhanUnreferencedUseNormal
 use MacFJA\BookRetriever\SearchResult\SearchResultBuilder;
 use function simplexml_load_string;
-// @phan-suppress-next-line PhanUnreferencedUseNormal
 use SimpleXMLElement;
 use function sprintf;
 use function strtolower;
@@ -112,7 +114,7 @@ class Amazon implements ProviderInterface, ConfigurableInterface, HttpClientAwar
     public function search(array $criteria): array
     {
         if (1 === count($criteria)) {
-            return $this->oneCriteria(key($criteria), current($criteria));
+            return $this->oneCriteria((string) key($criteria), current($criteria));
         }
 
         $params = [];
@@ -154,10 +156,13 @@ class Amazon implements ProviderInterface, ConfigurableInterface, HttpClientAwar
     }
 
     /**
-     * @param float|int|string $value
+     * @param bool|float|int|string $value
      */
     protected function oneCriteria(string $field, $value): array
     {
+        if (is_bool($value)) {
+            $value = true === $value ? '1' : '0';
+        }
         switch (strtolower($field)) {
             case 'isbn':
                 return $this->doRequest(sprintf(self::API_ISBN_URL_PATTERN, $value));
@@ -170,6 +175,9 @@ class Amazon implements ProviderInterface, ConfigurableInterface, HttpClientAwar
         }
     }
 
+    /**
+     * @psalm-suppress RedundantConditionGivenDocblockType
+     */
     private function doRequest(string $queryUrl): array
     {
         $client = $this->getHttpClient();
@@ -188,6 +196,7 @@ class Amazon implements ProviderInterface, ConfigurableInterface, HttpClientAwar
 
             /** @var SimpleXMLElement $item */
             foreach ($response->Item->children() as $item) {
+                assert($item instanceof SimpleXMLElement);
                 $results[] = SearchResultBuilder::createFromArray([
                     'authors' => [(string) $item->ItemAttributes->Author],
                     'amazon_id' => (string) $item->ASIN,

@@ -86,6 +86,9 @@ class SearchResultBuilder
         return $this->result;
     }
 
+    /**
+     * @param array<string,float|int|mixed|string> $data
+     */
     public static function createFromArray(array $data): SearchResultInterface
     {
         $builder = new self();

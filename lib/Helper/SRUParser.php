@@ -43,7 +43,11 @@ class SRUParser
     public function parseSRU(string $source): array
     {
         $source = preg_replace('/xmlns="[^"]+"/', '', $source);
-        $xml = simplexml_load_string($source);
+        $xml = @simplexml_load_string($source);
+
+        if (false === $xml) {
+            return [];
+        }
 
         $results = [];
         foreach ($xml->xpath('//*[local-name()="recordData"]/mods') as $mods) {

@@ -83,11 +83,20 @@ class LibraryThing implements ProviderInterface, ConfigurableInterface, HttpClie
             sprintf(self::API_URL_PATTERN, urlencode($isbn), urlencode($this->apiKey))
         ));
 
-        $xml = simplexml_load_string($response->getBody()->getContents());
+        $xml = @simplexml_load_string($response->getBody()->getContents());
+
+        if (false === $xml) {
+            return [];
+        }
 
         $results = [];
         foreach ($xml->xpath('//*[name()="item"][@type="work"]') as $work) {
             $xpathValue = $work->xpath('//*[name()="commonknowledge"]//*[name()="field"][@type="16"]//*[name()="fact"]/text()');
+
+            if (false === $xpathValue) {
+                continue;
+            }
+
             $publicationDate = reset($xpathValue);
 
             if ($publicationDate instanceof SimpleXMLElement) {

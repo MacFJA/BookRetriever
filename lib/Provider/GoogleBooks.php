@@ -23,10 +23,10 @@ use AppendIterator;
 use function array_filter;
 use function array_reduce;
 use ArrayIterator;
+use function assert;
 use DateTime;
 use EmptyIterator;
 use Exception;
-// @phan-suppress-next-line PhanUnreferencedUseNormal
 use Generator;
 use MacFJA\BookRetriever\ProviderInterface;
 use MacFJA\BookRetriever\SearchResult\SearchResultBuilder;
@@ -62,6 +62,9 @@ class GoogleBooks implements ProviderInterface
         return 'Google Books';
     }
 
+    /**
+     * @psalm-suppress RedundantConditionGivenDocblockType
+     */
     public function searchIsbn(string $isbn): array
     {
         $client = new \Scriptotek\GoogleBooks\Volumes(new \Scriptotek\GoogleBooks\GoogleBooks());
@@ -74,6 +77,7 @@ class GoogleBooks implements ProviderInterface
             if (13 === strlen($isbn)) {
                 /** @var Generator $ean */
                 $ean = $client->search('ean:'.$isbn);
+                assert($ean instanceof Generator);
             }
 
             $volumes = new AppendIterator();

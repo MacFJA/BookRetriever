@@ -48,7 +48,7 @@ trait IsbnOnlyTrait
             $value = current($criteria);
 
             if (in_array($type, ['isbn', 'ean'], true)) {
-                return $this->searchIsbn($value);
+                return $this->searchIsbn((string) $value);
             }
         }
 

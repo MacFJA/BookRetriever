@@ -21,6 +21,7 @@ namespace MacFJA\BookRetriever\Provider;
 
 use function array_filter;
 use function count;
+use function current;
 use function explode;
 use function http_build_query;
 use function key;
@@ -29,7 +30,6 @@ use MacFJA\BookRetriever\Helper\HttpClientAwareTrait;
 use MacFJA\BookRetriever\ProviderInterface;
 use MacFJA\BookRetriever\SearchResult\SearchResultBuilder;
 use Psr\Http\Message\ResponseInterface;
-use function reset;
 use function simplexml_load_string;
 use function sprintf;
 use function strpos;
@@ -95,7 +95,7 @@ class OCLC implements ProviderInterface, HttpClientAwareInterface
     public function search(array $criteria): array
     {
         if (1 === count($criteria)) {
-            return $this->oneFieldSearch(key($criteria), reset($criteria));
+            return $this->oneFieldSearch((string) key($criteria), current($criteria) ?: '0');
         }
 
         $client = $this->getHttpClient();
@@ -112,7 +112,11 @@ class OCLC implements ProviderInterface, HttpClientAwareInterface
 
     protected function parseResult(ResponseInterface $response): array
     {
-        $xml = simplexml_load_string($response->getBody()->getContents());
+        $xml = @simplexml_load_string($response->getBody()->getContents());
+
+        if (false === $xml) {
+            return [];
+        }
 
         $results = [];
         foreach ($xml->xpath('//*[local-name()="work"]') as $work) {
