@@ -95,6 +95,10 @@ class LaLibrairie implements ProviderInterface, HttpClientAwareInterface
 
         $xml = $this->htmlGetter->getWebpageAsXml(static::WEBPAGE_BASE_URL.$location);
 
+        if (null === $xml) {
+            return [];
+        }
+
         $allMeta = $xml->xpath('//*[local-name()="meta"]');
         $itemProperties = $xml->xpath('//*[@itemprop]');
 

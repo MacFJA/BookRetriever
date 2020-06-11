@@ -46,7 +46,7 @@ class ISBNDb implements ProviderInterface, ConfigurableInterface, HttpClientAwar
     use HttpClientAwareTrait;
 
     /** @var string */
-    protected $apiKey;
+    protected $apiKey = '';
 
     public function setApiKey(string $apiKey): void
     {

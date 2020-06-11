@@ -58,6 +58,11 @@ class SearchResultBuilder
         $this->result = new SearchResult();
     }
 
+    /**
+     * @param array|float|int|mixed|string $value
+     *
+     * @return $this
+     */
     public function with(string $field, $value): self
     {
         $value = $this->handleArrayData($field, $value);
@@ -92,6 +97,9 @@ class SearchResultBuilder
         return $builder->getResult();
     }
 
+    /**
+     * @param array|mixed $value
+     */
     private function handleArray(string $field, $value): bool
     {
         if (!in_array($field, self::ARRAY_FIELDS, true)) {
@@ -107,6 +115,9 @@ class SearchResultBuilder
         return true;
     }
 
+    /**
+     * @param DateTimeInterface|int|mixed|string $value
+     */
     private function getDateFrom($value): ?DateTimeInterface
     {
         if ($value instanceof DateTimeInterface) {
@@ -135,6 +146,9 @@ class SearchResultBuilder
         return $this->guessDateFrom($value);
     }
 
+    /**
+     * @param int|string $value
+     */
     private function guessDateFrom($value): ?DateTimeInterface
     {
         try {
@@ -147,18 +161,21 @@ class SearchResultBuilder
                 'Y-m',
                 'm-Y',
             ] as $format) {
-                $parsed = DateTime::createFromFormat($format, $value);
+                $parsed = DateTime::createFromFormat($format, (string) $value);
                 if ($parsed instanceof DateTimeInterface) {
                     break;
                 }
             }
 
-            return ($parsed instanceof DateTimeInterface) ? $parsed : new DateTime($value);
+            return ($parsed instanceof DateTimeInterface) ? $parsed : new DateTime((string) $value);
         } catch (Exception $exception) {
             return null;
         }
     }
 
+    /**
+     * @param DateTimeInterface|mixed $value
+     */
     private function handleDate(string $field, $value): bool
     {
         if (!in_array($field, self::DATE_FIELDS, true)) {
@@ -178,6 +195,11 @@ class SearchResultBuilder
         return false;
     }
 
+    /**
+     * @param array|mixed $value
+     *
+     * @return array|mixed|string
+     */
     private function handleArrayData(string $field, $value)
     {
         if (!is_array($value)) {
@@ -195,6 +217,9 @@ class SearchResultBuilder
         return $value;
     }
 
+    /**
+     * @param array<int>|float|int|string $value
+     */
     private function handleInt(string $field, $value): bool
     {
         $methodName = 'set'.ucfirst($field);
@@ -212,6 +237,9 @@ class SearchResultBuilder
         return false;
     }
 
+    /**
+     * @param array<string>|string $value
+     */
     private function handleString(string $field, $value): bool
     {
         $methodName = 'set'.ucfirst($field);
@@ -228,6 +256,9 @@ class SearchResultBuilder
         return false;
     }
 
+    /**
+     * @param null|mixed $value
+     */
     private function appendToAdditional(string $field, $value): void
     {
         $additional = $this->result->getAdditional();
@@ -240,6 +271,9 @@ class SearchResultBuilder
         $this->result->setAdditional($additional);
     }
 
+    /**
+     * @param null|mixed $value
+     */
     private function handleSpecialArray(string $field, $value): bool
     {
         if (!in_array($field, self::SPECIAL_ARRAY_FIELDS, true)) {

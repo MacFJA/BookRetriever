@@ -37,12 +37,14 @@ class HtmlGetter implements HttpClientAwareInterface
 {
     use HttpClientAwareTrait;
 
-    public function getWebpageAsXml(string $url): SimpleXMLElement
+    public function getWebpageAsXml(string $url): ?SimpleXMLElement
     {
-        $xml = $this->getWebpageAsDom($url);
-        $xmlString = $xml->saveXML();
+        $dom = $this->getWebpageAsDom($url);
+        $xmlString = $dom->saveXML();
 
-        return simplexml_load_string($xmlString);
+        $xml = @simplexml_load_string($xmlString);
+
+        return false === $xml ? null : $xml;
     }
 
     public function getWebpageAsDom(string $url): DOMDocument

@@ -53,13 +53,13 @@ class Ebay implements ProviderInterface, ConfigurableInterface
     use OneCriteriaOnlyTrait;
 
     /** @var string */
-    protected $devId;
+    protected $devId = '';
 
     /** @var string */
-    protected $appId;
+    protected $appId = '';
 
     /** @var string */
-    protected $certId;
+    protected $certId = '';
 
     public function setDevId(string $devId): void
     {
@@ -98,9 +98,13 @@ class Ebay implements ProviderInterface, ConfigurableInterface
         $this->setDevId($parameters['dev_id']);
     }
 
+    /**
+     * @psalm-suppress DocblockTypeContradiction
+     * @psalm-suppress RedundantConditionGivenDocblockType
+     */
     protected function oneCriteriaSearch(string $field, $value): array
     {
-        $response = $this->getResponse($field, $value);
+        $response = $this->getResponse($field, (string) $value);
 
         if (empty($response->errorMessage)) {
             return [];

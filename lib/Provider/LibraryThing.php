@@ -58,7 +58,7 @@ class LibraryThing implements ProviderInterface, ConfigurableInterface, HttpClie
         '&apikey=%s';
 
     /** @var string */
-    protected $apiKey;
+    protected $apiKey = '';
 
     public function setApiKey(string $apiKey): void
     {

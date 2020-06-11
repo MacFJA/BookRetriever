@@ -60,7 +60,7 @@ class Pool implements ProviderInterface
             $resultGroup[$provider->getCode()] = array_unique($provider->search($criteria), \SORT_REGULAR);
         }
 
-        return array_reduce($resultGroup, function ($carry, $item) {
+        return array_reduce($resultGroup, function (array $carry, array $item): array {
             return array_merge($carry, $item);
         }, []);
     }
@@ -72,7 +72,7 @@ class Pool implements ProviderInterface
             $resultGroup[$provider->getCode()] = array_unique($provider->searchIsbn($isbn), \SORT_REGULAR);
         }
 
-        return array_reduce($resultGroup, function ($carry, $item) {
+        return array_reduce($resultGroup, function (array $carry, array $item): array {
             return array_merge($carry, $item);
         }, []);
     }
@@ -100,6 +100,7 @@ class Pool implements ProviderInterface
 
     /**
      * @return iterable<ProviderInterface>
+     * @psalm-suppress RedundantConditionGivenDocblockType
      */
     protected function getActiveProviders(): iterable
     {

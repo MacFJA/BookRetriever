@@ -84,10 +84,10 @@ class Amazon implements ProviderInterface, ConfigurableInterface, HttpClientAwar
     protected const COUNTRY_DOMAINS = ['fr', 'us', 'com', 'de', 'ca', 'es', 'co.jp', 'co.uk'];
 
     /** @var string */
-    protected $accessKey;
+    protected $accessKey = '';
 
     /** @var string */
-    protected $associateTag;
+    protected $associateTag = '';
 
     public function setAccessKey(string $accessKey): void
     {
@@ -153,6 +153,9 @@ class Amazon implements ProviderInterface, ConfigurableInterface, HttpClientAwar
         return urlencode($mapping[$field]).'='.urlencode($value);
     }
 
+    /**
+     * @param float|int|string $value
+     */
     protected function oneCriteria(string $field, $value): array
     {
         switch (strtolower($field)) {
@@ -163,7 +166,7 @@ class Amazon implements ProviderInterface, ConfigurableInterface, HttpClientAwar
             case 'asin':
                 return $this->doRequest(sprintf(self::API_ASIN_URL_PATTERN, $value));
             default:
-                return $this->doRequest(sprintf(self::API_SEARCH_URL_PATTERN, $this->getUrlSearchTerm($field, $value)));
+                return $this->doRequest(sprintf(self::API_SEARCH_URL_PATTERN, $this->getUrlSearchTerm($field, (string) $value)));
         }
     }
 

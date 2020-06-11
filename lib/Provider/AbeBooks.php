@@ -104,6 +104,10 @@ class AbeBooks implements ProviderInterface, HttpClientAwareInterface
 
         $xml = $this->getHtmlGetter()->getWebpageAsXml(sprintf(static::WEBPAGE_BASE_PATTERN, http_build_query($query)));
 
+        if (null === $xml) {
+            return [];
+        }
+
         return $this->extractFromXml($xml);
     }
 

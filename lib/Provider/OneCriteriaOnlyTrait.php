@@ -40,7 +40,7 @@ trait OneCriteriaOnlyTrait
     }
 
     /**
-     * @param $value
+     * @param float|int|mixed|string $value
      *
      * @return SearchResultInterface[]
      */

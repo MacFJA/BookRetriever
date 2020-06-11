@@ -55,7 +55,7 @@ class GoodReads implements ProviderInterface, ConfigurableInterface
     use IsbnAsCriteriaTrait;
 
     /** @var string */
-    protected $apiKey;
+    protected $apiKey = '';
 
     public function setApiKey(string $apiKey): void
     {
@@ -64,7 +64,7 @@ class GoodReads implements ProviderInterface, ConfigurableInterface
 
     public function oneCriteriaSearch(string $field, $value): array
     {
-        $response = $this->getResponse($field, $value);
+        $response = $this->getResponse($field, (string) $value);
 
         $results = [];
 

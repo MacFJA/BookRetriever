@@ -37,13 +37,15 @@ class SRUParser
 {
     use XPathOperationTrait;
 
+    /**
+     * @psalm-suppress RedundantCondition
+     */
     public function parseSRU(string $source): array
     {
         $source = preg_replace('/xmlns="[^"]+"/', '', $source);
         $xml = simplexml_load_string($source);
 
         $results = [];
-        /** @var SimpleXMLElement $mods */
         foreach ($xml->xpath('//*[local-name()="recordData"]/mods') as $mods) {
             assert($mods instanceof SimpleXMLElement);
             $mods->registerXPathNamespace('n', 'http://www.loc.gov/mods/v3');

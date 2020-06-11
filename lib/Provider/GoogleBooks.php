@@ -30,6 +30,7 @@ use Exception;
 use Generator;
 use MacFJA\BookRetriever\ProviderInterface;
 use MacFJA\BookRetriever\SearchResult\SearchResultBuilder;
+use MacFJA\BookRetriever\SearchResultInterface;
 use Scriptotek\GoogleBooks\Volume;
 use stdClass;
 use function strlen;
@@ -90,7 +91,7 @@ class GoogleBooks implements ProviderInterface
         }
     }
 
-    protected function parseVolume(Volume $volume)
+    protected function parseVolume(Volume $volume): SearchResultInterface
     {
         $normalized = [
             'googlebooks_link' => $volume->selfLink,

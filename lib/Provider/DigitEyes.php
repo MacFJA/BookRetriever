@@ -59,10 +59,10 @@ class DigitEyes implements ProviderInterface, ConfigurableInterface, HttpClientA
         '&field_names=%s';
 
     /** @var string */
-    private $apiKey;
+    private $apiKey = '';
 
     /** @var string */
-    private $appCode;
+    private $appCode = '';
 
     /** @var string */
     private $language = 'en';

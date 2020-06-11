@@ -24,6 +24,7 @@ use MacFJA\BookRetriever\Helper\HttpClientAwareInterface;
 use MacFJA\BookRetriever\Helper\HttpClientAwareTrait;
 use MacFJA\BookRetriever\Helper\SRUParser;
 use MacFJA\BookRetriever\ProviderInterface;
+use Psr\Http\Client\ClientExceptionInterface;
 
 abstract class SearchRetrieveUrlProvider implements ProviderInterface, HttpClientAwareInterface
 {
@@ -44,10 +45,15 @@ abstract class SearchRetrieveUrlProvider implements ProviderInterface, HttpClien
     public function search(array $criteria): array
     {
         $client = $this->getHttpClient();
-        $response = $client->sendRequest($this->createHttpRequest(
-            'GET',
-            $this->getApiUrlForTerms($criteria)
-        ));
+
+        try {
+            $response = $client->sendRequest($this->createHttpRequest(
+                'GET',
+                $this->getApiUrlForTerms($criteria)
+            ));
+        } catch (ClientExceptionInterface $e) {
+            return [];
+        }
 
         if (!(200 === $response->getStatusCode())) {
             return [];

@@ -35,10 +35,13 @@ use Psr\Http\Message\UriInterface;
  */
 trait HttpClientAwareTrait
 {
+    /** @var null|StreamFactoryInterface */
     private $httpStreamFactory;
 
+    /** @var null|ClientInterface */
     private $httpClient;
 
+    /** @var null|RequestFactoryInterface */
     private $httpRequestFactory;
 
     public function setHttpClient(ClientInterface $client): void

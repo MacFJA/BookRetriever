@@ -42,6 +42,7 @@ class FeedBooks extends OpenPublicationDistributionSystemProvider implements Con
 {
     public const API_PATTERN = 'https://www.feedbooks.com/search.atom?lang=%s&query=%s';
 
+    /** @var string */
     protected $language = 'en';
 
     public function setLanguage(string $language): FeedBooks
