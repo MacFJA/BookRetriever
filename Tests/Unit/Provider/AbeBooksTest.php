@@ -40,7 +40,7 @@ use MacFJA\BookRetriever\Tests\Unit\BaseProviderTestCase;
  */
 class AbeBooksTest extends BaseProviderTestCase
 {
-    public function dataProvider($testName): array
+    public function dataProvider(string $testName): array
     {
         if ('testSearchIsbn' === $testName) {
             return [

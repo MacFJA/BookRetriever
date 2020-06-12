@@ -39,13 +39,24 @@ use Psr\Http\Client\ClientInterface;
  */
 abstract class BaseProviderTestCase extends TestCase
 {
-    /** @var Client */
+    use PhpUnitPsalmTrait;
+
+    /**
+     * @var Client
+     * @psalm-suppress PropertyNotSetInConstructor
+     */
     private $httpClient;
 
-    /** @var FixtureResponse */
+    /**
+     * @var FixtureResponse
+     * @psalm-suppress PropertyNotSetInConstructor
+     */
     private $fixtureResponse;
 
-    /** @var ProviderConfigurator */
+    /**
+     * @var ProviderConfigurator
+     * @psalm-suppress PropertyNotSetInConstructor
+     */
     private $configurator;
 
     /**
@@ -88,7 +99,7 @@ abstract class BaseProviderTestCase extends TestCase
         parent::setUp();
     }
 
-    abstract public function dataProvider($testName): array;
+    abstract public function dataProvider(string $testName): array;
 
     /**
      * @covers \MacFJA\BookRetriever\ProviderInterface::searchIsbn
