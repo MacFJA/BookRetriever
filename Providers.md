@@ -93,6 +93,18 @@ Available search are:
 
 They can only be use one at a time.
 
+## Eyrolles search engine provider.
+
+_(Language: FR)_
+
+It's a [Web scraping](https://en.wikipedia.org/wiki/Web_scraping).
+Available search are:
+
+ - ISBN
+ - EAN
+
+They can only be use one at a time.
+
 ## FeedBooks search engine provider.
 
 Available search are:

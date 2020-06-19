@@ -167,7 +167,7 @@ class SomeController extends AbstractController
 
 ## Providers
 
-There are currently **19** built-in providers.
+There are currently **20** built-in providers.
 You can find [more details here](Providers.md).
 
 ## Contributing
