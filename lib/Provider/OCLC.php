@@ -20,6 +20,7 @@
 namespace MacFJA\BookRetriever\Provider;
 
 use function array_filter;
+use function array_values;
 use function count;
 use function current;
 use function explode;
@@ -123,18 +124,18 @@ class OCLC implements ProviderInterface, HttpClientAwareInterface
             $authors = explode(' | ', (string) $work['author']);
 
             $results[] = SearchResultBuilder::createFromArray([
-                'authors' => array_filter($authors, function (string $author): bool {
+                'authors' => array_values(array_filter($authors, function (string $author): bool {
                     return (
                         false === strpos($author, 'Illustrator') &&
                         false === strpos($author, 'Translator')
                     ) || 0 < strpos($author, 'Author');
-                }),
-                'illustrators' => array_filter($authors, function (string $author): bool {
+                })),
+                'illustrators' => array_values(array_filter($authors, function (string $author): bool {
                     return 0 < strpos($author, 'Illustrator');
-                }),
-                'translators' => array_filter($authors, function (string $author): bool {
+                })),
+                'translators' => array_values(array_filter($authors, function (string $author): bool {
                     return 0 < strpos($author, 'Translator');
-                }),
+                })),
                 'format' => $work['format'],
                 'title' => $work['title'],
             ]);

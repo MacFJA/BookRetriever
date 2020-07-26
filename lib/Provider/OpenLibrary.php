@@ -21,6 +21,7 @@ namespace MacFJA\BookRetriever\Provider;
 
 use function array_filter;
 use function array_map;
+use function array_values;
 use function count;
 use DateTime;
 use InvalidArgumentException;
@@ -91,9 +92,9 @@ class OpenLibrary implements ProviderInterface, HttpClientAwareInterface
 
         foreach ($json as $searchResult) {
             $result = [
-                'publisher' => array_filter(array_map(function (array $item) {
+                'publisher' => array_values(array_filter(array_map(function (array $item) {
                     return $item['name'] ?? null;
-                }, $searchResult['publishers'] ?? [])),
+                }, $searchResult['publishers'] ?? []))),
                 'isbn' => $searchResult['identifiers']['isbn_13'] ?? $searchResult['identifiers']['isbn_10'] ?? null,
                 'google_id' => $searchResult['identifiers']['google'] ?? null,
                 'lccn_id' => $searchResult['identifiers']['lccn'] ?? null,
@@ -109,12 +110,12 @@ class OpenLibrary implements ProviderInterface, HttpClientAwareInterface
                 'openlibrary_link' => $searchResult['url'] ?? null,
                 'pages' => $searchResult['number_of_pages'] ?? null,
                 'cover' => $searchResult['cover']['large'] ?? null,
-                'genres' => array_filter(array_map(function (array $item) {
+                'genres' => array_values(array_filter(array_map(function (array $item) {
                     return $item['name'] ?? null;
-                }, $searchResult['subjects'] ?? [])),
-                'authors' => array_filter(array_map(function (array $item) {
+                }, $searchResult['subjects'] ?? []))),
+                'authors' => array_values(array_filter(array_map(function (array $item) {
                     return $item['name'] ?? null;
-                }, $searchResult['authors'] ?? [])),
+                }, $searchResult['authors'] ?? []))),
             ];
 
             $publishingDate = $searchResult['publish_date'] ?? null;

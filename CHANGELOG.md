@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2020-07-26
+### Fixed
+- Some data not returned as pure array
+
 ## [1.1.0] - 2020-06-19
 ### Added
 - New provider: Eyrolles
@@ -40,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New provider: Open Library Books
 - New provider: Random House
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/1.1.1...HEAD
+[1.1.1]: https://github.com/MacFJA/BookRetriever/compare/1.1.0...1.1.1
 [1.1.0]: https://github.com/MacFJA/BookRetriever/compare/1.0.0...1.1.0
 [1.0.0]: https://github.com/MacFJA/BookRetriever/releases/tag/1.0.0
