@@ -23,6 +23,7 @@ use DateTime;
 use MacFJA\BookRetriever\Helper\ConfigurableInterface;
 use MacFJA\BookRetriever\Helper\HttpClientAwareInterface;
 use MacFJA\BookRetriever\Helper\HttpClientAwareTrait;
+use MacFJA\BookRetriever\MissingParameterException;
 use MacFJA\BookRetriever\ProviderInterface;
 use MacFJA\BookRetriever\SearchResult\SearchResultBuilder;
 use function reset;
@@ -77,6 +78,10 @@ class LibraryThing implements ProviderInterface, ConfigurableInterface, HttpClie
 
     public function searchIsbn(string $isbn): array
     {
+        MissingParameterException::throwIfMissing($this, [
+            'api_key' => $this->apiKey,
+        ], 'You need an account to use this provider: https://www.librarything.com/services/keys.php');
+
         $client = $this->getHttpClient();
         $response = $client->sendRequest($this->createHttpRequest(
             'GET',

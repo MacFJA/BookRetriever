@@ -22,6 +22,7 @@ namespace MacFJA\BookRetriever\Provider;
 use DateTime;
 use function is_array;
 use MacFJA\BookRetriever\Helper\ConfigurableInterface;
+use MacFJA\BookRetriever\MissingParameterException;
 use MacFJA\BookRetriever\ProviderInterface;
 use MacFJA\BookRetriever\SearchResult\SearchResultBuilder;
 use function ob_clean;
@@ -181,6 +182,10 @@ class GoodReads implements ProviderInterface, ConfigurableInterface
 
     private function getResponse(string $field, string $value): array
     {
+        MissingParameterException::throwIfMissing($this, [
+            'api_key' => $this->apiKey,
+        ], 'You need an account to use this provider: https://www.goodreads.com/user/new');
+
         $goodReads = new \Nicat\GoodReads\GoodReads($this->apiKey);
 
         ob_start();
