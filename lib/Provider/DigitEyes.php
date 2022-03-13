@@ -26,6 +26,7 @@ use function json_decode;
 use MacFJA\BookRetriever\Helper\ConfigurableInterface;
 use MacFJA\BookRetriever\Helper\HttpClientAwareInterface;
 use MacFJA\BookRetriever\Helper\HttpClientAwareTrait;
+use MacFJA\BookRetriever\MissingParameterException;
 use MacFJA\BookRetriever\ProviderInterface;
 use MacFJA\BookRetriever\SearchResult\SearchResultBuilder;
 use function sprintf;
@@ -94,6 +95,12 @@ class DigitEyes implements ProviderInterface, ConfigurableInterface, HttpClientA
 
     public function searchIsbn(string $isbn): array
     {
+        MissingParameterException::throwIfMissing($this, [
+            'api_key' => $this->apiKey,
+            'app_code' => $this->appCode,
+            'language' => $this->language,
+        ], 'You need an account to use this provider: https://www.digit-eyes.com/cgi-bin/digiteyes.cgi?action=signup');
+
         $client = $this->getHttpClient();
         $response = $client->sendRequest(
             $this->createHttpRequest('GET', sprintf(

@@ -32,6 +32,7 @@ use function key;
 use MacFJA\BookRetriever\Helper\ConfigurableInterface;
 use MacFJA\BookRetriever\Helper\HttpClientAwareInterface;
 use MacFJA\BookRetriever\Helper\HttpClientAwareTrait;
+use MacFJA\BookRetriever\MissingParameterException;
 use MacFJA\BookRetriever\ProviderInterface;
 // @phan-suppress-next-line PhanUnreferencedUseNormal
 use MacFJA\BookRetriever\SearchResult\SearchResultBuilder;
@@ -180,6 +181,11 @@ class Amazon implements ProviderInterface, ConfigurableInterface, HttpClientAwar
      */
     private function doRequest(string $queryUrl): array
     {
+        MissingParameterException::throwIfMissing($this, [
+            'access_key' => $this->accessKey,
+            'associated_tag' => $this->associateTag,
+        ], 'You need an account to use this provider: https://docs.aws.amazon.com/AWSECommerceService/latest/DG/becomingAssociate.html');
+
         $client = $this->getHttpClient();
         $results = [];
         foreach (self::COUNTRY_DOMAINS as $domain) {

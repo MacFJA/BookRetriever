@@ -27,6 +27,7 @@ use DTS\eBaySDK\Finding\Types\FindItemsByProductRequest;
 use DTS\eBaySDK\Finding\Types\ProductId;
 use function in_array;
 use MacFJA\BookRetriever\Helper\ConfigurableInterface;
+use MacFJA\BookRetriever\MissingParameterException;
 use MacFJA\BookRetriever\ProviderInterface;
 use MacFJA\BookRetriever\SearchResult\SearchResultBuilder;
 use function strtoupper;
@@ -132,6 +133,12 @@ class Ebay implements ProviderInterface, ConfigurableInterface
 
     private function getResponse(string $field, string $value): BaseFindingServiceResponse
     {
+        MissingParameterException::throwIfMissing($this, [
+            'app_id' => $this->appId,
+            'cert_id' => $this->certId,
+            'dev_id' => $this->devId,
+        ], 'You need an account to use this provider: https://developer.ebay.com/signin');
+
         $service = new FindingService(['credentials' => [
             'devId' => $this->devId,
             'appId' => $this->appId,
